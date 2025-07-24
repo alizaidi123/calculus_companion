@@ -16,33 +16,84 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Calculus Companion', // ✅ This sets internal app name
+      title: 'Calculus Companion',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.deepPurple,
-        scaffoldBackgroundColor: const Color(0xFFF6EDF9),
-        textTheme: GoogleFonts.poppinsTextTheme(
+        colorScheme: ColorScheme.fromSwatch(
+          primarySwatch: Colors.blueGrey,
+          accentColor: const Color(0xFFF78888),
+        ).copyWith(
+          primary: const Color(0xFF4A6572), // Deep Teal/Blue-Grey
+          onPrimary: Colors.white,
+          secondary: const Color(0xFFF78888), // Soft Coral
+          onSecondary: Colors.white,
+          surface: Colors.white, // Card/input background
+          onSurface: Colors.grey.shade800,
+          background: const Color(
+              0xFFF8F8F8), // Very light grey background (will be overridden by gradient)
+          onBackground: Colors.grey.shade800,
+          error: Colors.red.shade700,
+          onError: Colors.white,
+        ),
+        // Scaffold background will be a gradient in HomeScreen
+        scaffoldBackgroundColor: Colors
+            .transparent, // Set to transparent here to allow gradient from body
+        textTheme: GoogleFonts.latoTextTheme(
           Theme.of(context).textTheme,
+        ).apply(
+          bodyColor: Colors.grey.shade800,
+          displayColor: Colors.grey.shade800,
         ),
         appBarTheme: const AppBarTheme(
-          backgroundColor: Color(0xFF6A1B9A),
+          backgroundColor: Colors.transparent,
           foregroundColor: Colors.white,
+          elevation: 0,
+          titleTextStyle: TextStyle(
+            fontSize: 24,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            letterSpacing: 0.8, // Slightly more spacious title
+          ),
         ),
         elevatedButtonTheme: ElevatedButtonThemeData(
           style: ElevatedButton.styleFrom(
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 14),
-            shape:
-                RoundedRectangleBorder(borderRadius: BorderRadius.circular(12)),
-            textStyle: const TextStyle(fontWeight: FontWeight.bold),
+            padding: const EdgeInsets.symmetric(horizontal: 24, vertical: 16),
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(12),
+            ),
+            textStyle:
+                const TextStyle(fontWeight: FontWeight.w600, fontSize: 16),
             foregroundColor: Colors.white,
-            backgroundColor: Colors.deepPurple,
+            backgroundColor: const Color(0xFF4A6572),
+            shadowColor: Colors.grey.shade400
+                .withOpacity(0.6), // Stronger, slightly colored shadow
+            elevation: 8, // Increased elevation
           ),
         ),
         inputDecorationTheme: InputDecorationTheme(
           filled: true,
           fillColor: Colors.white,
-          border: OutlineInputBorder(borderRadius: BorderRadius.circular(12)),
-          hintStyle: const TextStyle(color: Colors.grey),
+          border: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: BorderSide.none,
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderRadius: BorderRadius.circular(15),
+            borderSide: const BorderSide(color: Color(0xFFF78888), width: 2),
+          ),
+          hintStyle: TextStyle(color: Colors.grey.shade500),
+          contentPadding:
+              const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
+        ),
+        cardTheme: CardThemeData(
+          elevation: 10, // Even higher elevation for cards
+          shape: RoundedRectangleBorder(
+            borderRadius: BorderRadius.circular(15),
+          ),
+          color: Colors.white,
+          shadowColor: Colors.grey.withOpacity(0.3),
+          margin: const EdgeInsets.symmetric(
+              vertical: 10.0), // More vertical margin
         ),
       ),
       home: const HomeScreen(),
